@@ -46,12 +46,12 @@ public class Worker implements Serializable {
         this.dailyIncome = dailyIncome;
     }
 
-    @Override
-    public final boolean equals(Object o) {
-        if (!(o instanceof Worker worker)) return false;
-
-        return Objects.equals(id, worker.id);
-    }
+//    @Override
+//    public final boolean equals(Object o) {
+//        if (!(o instanceof Worker worker)) return false;
+//
+//        return Objects.equals(id, worker.id);
+//    }
 
     @Override
     public int hashCode() {

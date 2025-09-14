@@ -1,0 +1,20 @@
+server:
+  port: 8101
+
+spring:
+  application:
+    name: hr-payroll
+  cloud:
+    loadbalancer:
+      clients:
+        hr-worker:
+          instances:
+            - host: localhost
+              port: 8001
+            - host: localhost
+              port: 8002
+
+logging:
+  level:
+    org.springframework.cloud.loadbalancer: DEBUG
+    org.springframework.cloud.openfeign: DEBUG
