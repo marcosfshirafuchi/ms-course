@@ -44,6 +44,13 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
+        <!-- Eureka Client “moderna” -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <!-- Não precisa colocar <version> se estiver usando o BOM -->
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>
