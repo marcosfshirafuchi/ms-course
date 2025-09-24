@@ -1,6 +1,9 @@
 server:
   port: 8101
 
+# Habilitando o relatório de autoconfiguração para diagnóstico
+debug: true
+
 spring:
   application:
     name: hr-payroll
@@ -12,5 +15,12 @@ eureka:
 
 logging:
   level:
+    # Logs detalhados para diagnóstico
     org.springframework.cloud.loadbalancer: DEBUG
     org.springframework.cloud.openfeign: DEBUG
+    io.github.resilience4j: DEBUG
+
+# Habilitando o Circuit Breaker para o Feign
+feign:
+  circuitbreaker:
+    enabled: true

@@ -3,8 +3,8 @@ package com.marcosfshirafuchi.hrpayroll.services;
 import com.marcosfshirafuchi.hrpayroll.entities.Payment;
 import com.marcosfshirafuchi.hrpayroll.entities.Worker;
 import com.marcosfshirafuchi.hrpayroll.feignclients.WorkerFeignClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.marcosfshirafuchi.hrpayroll.services.exceptions.ResourceNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
