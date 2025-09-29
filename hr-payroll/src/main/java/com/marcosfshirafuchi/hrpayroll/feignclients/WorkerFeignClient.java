@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 
-@FeignClient(name = "hr-worker", path = "/workers", fallbackFactory = WorkerFeignClientFallbackFactory.class)
+@FeignClient(name = "hr-worker", fallbackFactory = WorkerFeignClientFallbackFactory.class)
 public interface WorkerFeignClient {
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/workers/{id}")
     ResponseEntity<Worker> findById(@PathVariable Long id);
 }
