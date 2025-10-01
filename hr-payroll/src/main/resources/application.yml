@@ -1,5 +1,7 @@
 server:
-  port: 8101
+  port: ${PORT:0}
+
+
 
 # Habilitando o relatório de autoconfiguração para diagnóstico
 debug: true
@@ -9,6 +11,10 @@ spring:
     name: hr-payroll
 
 eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    hostname: localhost
+    prefer-ip-address: true
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
