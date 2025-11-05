@@ -23,8 +23,9 @@ public class WorkerResource {
 
     private Logger logger = LoggerFactory.getLogger(WorkerResource.class);
 
-    @Value("${test.config}")
+    @Value("${test.config:valor-padrao}")
     private String testConfig;
+
 
     @Autowired
     private Environment env;
