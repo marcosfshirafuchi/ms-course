@@ -19,7 +19,7 @@ import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 public class GatewaySecurityConfig {
 
     private static final String[] PUBLIC = {
-            "/hr-oauth/oauth/token",          // compat antigo
+            "/hr-oauth/oauth/token",          // legado
             "/hr-oauth/oauth2/token",         // SAS atual
             "/hr-oauth/oauth2/jwks",
             "/hr-oauth/.well-known/**",
@@ -42,7 +42,10 @@ public class GatewaySecurityConfig {
     ) {
         http
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
+                .cors(cors -> {}) // integra com o CorsWebFilter/CorsConfiguration abaixo
                 .authorizeExchange(auth -> auth
+                        // libere o preflight sempre
+                        .pathMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .pathMatchers(PUBLIC).permitAll()
                         .pathMatchers(HttpMethod.GET, OPERATOR_GET).hasAnyRole("OPERATOR", "ADMIN")
                         .pathMatchers(ADMIN).hasRole("ADMIN")
@@ -57,14 +60,24 @@ public class GatewaySecurityConfig {
 
     /**
      * CORS para WebFlux (reactive).
+     * Use origens explícitas (ex.: http://localhost:3000) quando allowCredentials=true.
      */
     @Bean
     public CorsWebFilter corsWebFilter() {
         CorsConfiguration cors = new CorsConfiguration();
-        cors.setAllowedOrigins(List.of("*"));
+
+        // Se você precisa usar credenciais (cookies/Authorization), NÃO use "*".
+        // Liste explicitamente as origens do seu front:
+        // cors.setAllowedOrigins(List.of("http://localhost:3000"));
+        // ou, se estiver em Spring 5.3+ e realmente precisar padrão curinga:
+        // cors.setAllowedOriginPatterns(List.of("*"));
+
+        cors.setAllowedOrigins(List.of("http://localhost:3000")); // recomendado
         cors.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         cors.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+        cors.setExposedHeaders(List.of("Authorization", "Location"));
         cors.setAllowCredentials(true);
+        cors.setMaxAge(3600L);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", cors);
