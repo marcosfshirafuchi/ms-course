@@ -55,7 +55,9 @@ Versões: Java 11 e Spring Boot 2.3.4! Aprenda Feign, Ribbon, Hystrix, OAuth, JW
 
 https://www.udemy.com/course/microsservicos-java-spring-cloud/?couponCode=KEEPLEARNINGBR
 
-
+## Link do repositório dos arquivos de configuração
+<b>MS COURSE CONFIGS:</b><br><br>
+https://github.com/marcosfshirafuchi/ms-course-configs
 
 ## Criando e testando containers Docker
 
